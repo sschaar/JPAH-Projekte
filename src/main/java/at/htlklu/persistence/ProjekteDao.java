@@ -1,6 +1,8 @@
 package at.htlklu.persistence;
 
+import at.htlklu.entities.ArbeitspaketeEntity;
 import at.htlklu.entities.MitarbeiterEntity;
+import at.htlklu.entities.ProjekteEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -33,5 +35,28 @@ public class ProjekteDao {
     return em.createQuery("SELECT e.vorname FROM MitarbeiterEntity e GROUP BY e.vorname HAVING COUNT(e.vorname) > 1").getResultList();
 }
 
+    // Wer ist der jüngste Mitarbeiter, geben Sie dessen Daten aus?
+    public static MitarbeiterEntity findYoungestMitarbeiter() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        return (MitarbeiterEntity) em.createQuery("Select e from MitarbeiterEntity e order by e.gebdat desc").setMaxResults(1).getSingleResult();
+    }
 
+      public static List<ArbeitspaketeEntity> findAllArbeitspakete(){
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        return em.createQuery("Select e from ArbeitspaketeEntity e").getResultList();
+    }
+
+    // Welche Bezeichnung haben die Arbeitspakete des Projekts mit dem Code X > X soll als Übergabeparameter der Methode übergeben werden?
+    public static List<String> findArbeitspaketByCode(String code) {
+    EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+    TypedQuery<ArbeitspaketeEntity> query = em.createQuery("SELECT a FROM ArbeitspaketeEntity a WHERE a.projekt.code = :code", ArbeitspaketeEntity.class);
+    query.setParameter("code", code);
+    List<ArbeitspaketeEntity> arbeitspaketeList = query.getResultList();
+
+    List<String> bezeichnungen = new ArrayList<>();
+    for (ArbeitspaketeEntity arbeitspaket : arbeitspaketeList) {
+        bezeichnungen.add(arbeitspaket.getBezeichnung());
+    }
+    return bezeichnungen;
+}
 }

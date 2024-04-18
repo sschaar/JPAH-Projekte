@@ -1,5 +1,6 @@
 package at.htlklu.app;
 
+import at.htlklu.entities.ArbeitspaketeEntity;
 import at.htlklu.entities.MitarbeiterEntity;
 import at.htlklu.persistence.ProjekteDao;
 
@@ -23,5 +24,17 @@ public class TestApp {
             System.out.println(mt);
         }
          */
+
+        // System.out.println(ProjekteDao.findYoungestMitarbeiter());
+
+        /*
+        List<ArbeitspaketeEntity> allArbeitspakete = ProjekteDao.findAllArbeitspakete();
+            for(ArbeitspaketeEntity at : allArbeitspakete){
+                System.out.println(at);
+            }
+
+         */
+
+        System.out.println(ProjekteDao.findArbeitspaketByCode("WSTP"));
     }
 }

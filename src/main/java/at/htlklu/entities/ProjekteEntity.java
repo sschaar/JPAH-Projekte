@@ -36,7 +36,7 @@ public class ProjekteEntity {
                 "nr=" + nr +
                 ", titel='" + titel + '\'' +
                 ", code='" + code + '\'' +
-                ", arbeitspaketesByNr=" + arbeitspaketesByNr +
+          //      ", arbeitspaketesByNr=" + arbeitspaketesByNr +
                 '}';
     }
 
