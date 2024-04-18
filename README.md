@@ -26,7 +26,7 @@ ordnen Sie (im state „managed“) ihm ein bestehendes Arbeitspaket zu.
 ➢ ZUERSTE DATENBANK BACKUP MACHEN! dann: Löschen Sie per „orphan removal“ ein Projekt
 aus Projekte, zeigen Sie was passiert ist.
 Zusatz:
-➢ Können Sie den Unterschied zwischen FETCH-TYPE „Lazy“ und FETCH-TYPE „Eager“
+    ➢ Können Sie den Unterschied zwischen FETCH-TYPE „Lazy“ und FETCH-TYPE „Eager“
 erkennen?
 Ja, FETCH-TYPE "Lazy" und FETCH-TYPE "Eager" sind zwei unterschiedliche Strategien für das Laden von Daten in einem ORM (Object-Relational Mapping) Kontext, wie es in vielen Java Persistence API (JPA) Implementierungen verwendet wird, z.B. in Hibernate.
 
@@ -40,4 +40,4 @@ Ja, FETCH-TYPE "Lazy" und FETCH-TYPE "Eager" sind zwei unterschiedliche Strategi
         Das bedeutet, dass bei der Abfrage des Hauptobjekts auch die assoziierten Objekte in derselben Abfrage geladen werden. Dadurch wird vermieden, dass weitere Abfragen an die Datenbank gesendet werden, um fehlende Daten nachzuladen.
         Eager Loading kann dazu führen, dass mehr Daten als notwendig abgerufen werden, insbesondere wenn viele assoziierte Objekte vorhanden sind oder wenn nur ein Teil der assoziierten Objekte tatsächlich benötigt wird.
 
-Die Wahl zwischen Lazy Loading und Eager Loading hängt von den spezifischen Anforderungen und dem Datenzugriffsmuster Ihrer Anwendung ab. In vielen Fällen ist eine Kombination beider Strategien die beste Lösung, um eine optimale Leistung zu erzielen.
+    Die Wahl zwischen Lazy Loading und Eager Loading hängt von den spezifischen Anforderungen und dem Datenzugriffsmuster Ihrer Anwendung ab. In vielen Fällen ist eine Kombination beider Strategien die beste Lösung, um eine optimale Leistung zu erzielen.
