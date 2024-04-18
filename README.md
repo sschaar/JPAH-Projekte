@@ -26,5 +26,17 @@ ordnen Sie (im state „managed“) ihm ein bestehendes Arbeitspaket zu.
 ➢ ZUERSTE DATENBANK BACKUP MACHEN! dann: Löschen Sie per „orphan removal“ ein Projekt
 aus Projekte, zeigen Sie was passiert ist.
 Zusatz:
-➢ Können Sie den Unterschied zwischen FETCH-TYPE „Lazy“ und FETCH-TYPE „Eager“
-erkennen?
+Können Sie den Unterschied zwischen FETCH-TYPE „Lazy“ und FETCH-TYPE „Eager“ erkennen?
+Ja, FETCH-TYPE "Lazy" und FETCH-TYPE "Eager" sind zwei unterschiedliche Strategien für das Laden von Daten in einem ORM (Object-Relational Mapping) Kontext, wie es in vielen Java Persistence API (JPA) Implementierungen verwendet wird, z.B. in Hibernate.
+
+    Lazy Loading (Lazy Fetch):
+        Bei Lazy Loading werden die assoziierten Objekte (z.B. in einer One-to-Many-Beziehung) erst dann geladen, wenn sie benötigt werden.
+        Das bedeutet, dass beim Laden des Hauptobjekts (z.B. einer Entität) zunächst nur die direkten Attribute dieser Entität geladen werden, während die assoziierten Objekte (z.B. in einer Collection) erst dann abgerufen werden, wenn darauf zugegriffen wird.
+        Dies kann Leistungsverbesserungen bieten, da nur die tatsächlich benötigten Daten abgerufen werden, was die Datenbanklast reduzieren kann. Es kann jedoch auch zu zusätzlichen Datenbankabfragen führen, wenn auf assoziierte Objekte zugegriffen wird.
+
+    Eager Loading (Eager Fetch):
+        Im Gegensatz dazu werden bei Eager Loading alle assoziierten Objekte (oder ein Teil davon) sofort geladen, wenn das Hauptobjekt geladen wird.
+        Das bedeutet, dass bei der Abfrage des Hauptobjekts auch die assoziierten Objekte in derselben Abfrage geladen werden. Dadurch wird vermieden, dass weitere Abfragen an die Datenbank gesendet werden, um fehlende Daten nachzuladen.
+        Eager Loading kann dazu führen, dass mehr Daten als notwendig abgerufen werden, insbesondere wenn viele assoziierte Objekte vorhanden sind oder wenn nur ein Teil der assoziierten Objekte tatsächlich benötigt wird.
+
+    Die Wahl zwischen Lazy Loading und Eager Loading hängt von den spezifischen Anforderungen und dem Datenzugriffsmuster Ihrer Anwendung ab. In vielen Fällen ist eine Kombination beider Strategien die beste Lösung, um eine optimale Leistung zu erzielen.
