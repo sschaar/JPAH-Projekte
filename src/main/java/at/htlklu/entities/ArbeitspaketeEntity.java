@@ -2,6 +2,7 @@ package at.htlklu.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,12 +27,19 @@ public class ArbeitspaketeEntity {
             fetch = FetchType.LAZY)
     private Set<MaApZuordEntity> maApZuordsById;
 
-    public ArbeitspaketeEntity(){}
-    public ArbeitspaketeEntity(String code, String bezeichnung, ProjekteEntity projekteByPrNr, Set<MaApZuordEntity> maApZuordsById) {
+    public ArbeitspaketeEntity(String code, String bezeichnung){
+        this.code = code;
+        this.bezeichnung = bezeichnung;
+    }
+    public ArbeitspaketeEntity(){maApZuordsById = new HashSet<>();}
+    public ArbeitspaketeEntity(String code, String bezeichnung, ProjekteEntity projekteByPrNr) {
         this.code = code;
         this.bezeichnung = bezeichnung;
         this.projekteByPrNr = projekteByPrNr;
-        this.maApZuordsById = maApZuordsById;
+        maApZuordsById = new HashSet<>();
+
+        //add this to its master(s)
+        projekteByPrNr.addArbeitspaket(this);
     }
 
     @Override

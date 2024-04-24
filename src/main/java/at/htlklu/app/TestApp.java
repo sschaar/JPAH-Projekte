@@ -2,7 +2,10 @@ package at.htlklu.app;
 
 import at.htlklu.entities.ArbeitspaketeEntity;
 import at.htlklu.entities.MitarbeiterEntity;
+import at.htlklu.entities.ProjekteEntity;
+import at.htlklu.persistence.JPAUtil;
 import at.htlklu.persistence.ProjekteDao;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
@@ -35,6 +38,11 @@ public class TestApp {
 
          */
 
-        System.out.println(ProjekteDao.findArbeitspaketByCode("WSTP"));
+        // System.out.println(ProjekteDao.findArbeitspaketByCode("WSTP"));
+
+        ProjekteDao.updateProjekte(new ArbeitspaketeEntity("B999", "IntelliJ Programmierung AT"), 2);
+
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        System.out.println(em.find(ProjekteEntity.class, 2));
     }
 }

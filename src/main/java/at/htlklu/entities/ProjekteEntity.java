@@ -93,4 +93,9 @@ public class ProjekteEntity {
     public void setArbeitspaketesByNr(Set<ArbeitspaketeEntity> arbeitspaketesByNr) {
         this.arbeitspaketesByNr = arbeitspaketesByNr;
     }
+
+    public void addArbeitspaket(ArbeitspaketeEntity ap){
+        this.arbeitspaketesByNr.add(ap);
+        ap.setProjekteByPrNr(this);
+    }
 }

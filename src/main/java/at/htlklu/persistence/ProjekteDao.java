@@ -4,6 +4,8 @@ import at.htlklu.entities.ArbeitspaketeEntity;
 import at.htlklu.entities.MitarbeiterEntity;
 import at.htlklu.entities.ProjekteEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class ProjekteDao {
     }
 
     // Welche Bezeichnung haben die Arbeitspakete des Projekts mit dem Code X > X soll als Übergabeparameter der Methode übergeben werden?
+    /*
     public static List<String> findArbeitspaketByCode(String code) {
     EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
     TypedQuery<ArbeitspaketeEntity> query = em.createQuery("SELECT a FROM ArbeitspaketeEntity a WHERE a.projekt.code = :code", ArbeitspaketeEntity.class);
@@ -59,4 +62,32 @@ public class ProjekteDao {
     }
     return bezeichnungen;
 }
+     */
+
+    public static List<ProjekteEntity> getProjekt(int id) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        TypedQuery<ProjekteEntity> query = em.createQuery("Select e from ProjekteEntity e where e.id = ?1", ProjekteEntity.class);
+        List<ProjekteEntity> pNew = query.setParameter(1, id).getResultList();
+        return pNew;
+    }
+
+    public static void updateProjekte (ArbeitspaketeEntity aNew, int pToUpdate) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        ProjekteEntity pByIdInContext;
+        try {
+            et.begin();
+            pByIdInContext = em.find(ProjekteEntity.class, pToUpdate);
+            pByIdInContext.addArbeitspaket(aNew);
+            em.persist(aNew);
+            em.flush();
+            et.commit();
+        } finally {
+            if (et.isActive()) {
+                et.rollback();
+            }
+            em.close();
+            JPAUtil.shutdown();
+        }
+    }
 }
