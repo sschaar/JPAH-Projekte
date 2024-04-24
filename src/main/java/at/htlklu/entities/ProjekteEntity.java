@@ -30,6 +30,11 @@ public class ProjekteEntity {
         this.arbeitspaketesByNr = arbeitspaketesByNr;
     }
 
+    public ProjekteEntity (String titel, String code) {
+        this.titel = titel;
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "ProjekteEntity{" +
@@ -40,6 +45,10 @@ public class ProjekteEntity {
                 '}';
     }
 
+    public void addArbeitspaket(ArbeitspaketeEntity ap){
+        this.arbeitspaketesByNr.add(ap);
+        ap.setProjekteByPrNr(this);
+    }
     public Integer getNr() {
         return nr;
     }
@@ -92,10 +101,5 @@ public class ProjekteEntity {
 
     public void setArbeitspaketesByNr(Set<ArbeitspaketeEntity> arbeitspaketesByNr) {
         this.arbeitspaketesByNr = arbeitspaketesByNr;
-    }
-
-    public void addArbeitspaket(ArbeitspaketeEntity ap){
-        this.arbeitspaketesByNr.add(ap);
-        ap.setProjekteByPrNr(this);
     }
 }

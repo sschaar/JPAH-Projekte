@@ -53,6 +53,11 @@ public class ArbeitspaketeEntity {
                 '}';
     }
 
+    public void addMaApZo(MaApZuordEntity mazo){
+        this.maApZuordsById.add(mazo);
+        mazo.setArbeitspaketeByApId(this);
+    }
+
     public Integer getId() {
         return id;
     }

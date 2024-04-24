@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,9 +44,9 @@ public class MitarbeiterEntity {
             fetch = FetchType.LAZY)
     private Set<MaApZuordEntity> maApZuordsById;
 
-    public MitarbeiterEntity() {}
+    public MitarbeiterEntity() {maApZuordsById = new HashSet<>();}
 
-    public MitarbeiterEntity(String nachname, String vorname, String geschlecht, LocalDate gebdat, String strasse, String plz, String ort, String bundesland, Set<MaApZuordEntity> maApZuordsById) {
+    public MitarbeiterEntity(String nachname, String vorname, String geschlecht, LocalDate gebdat, String strasse, String plz, String ort, String bundesland) {
         this.nachname = nachname;
         this.vorname = vorname;
         this.geschlecht = geschlecht;
@@ -54,7 +55,9 @@ public class MitarbeiterEntity {
         this.plz = plz;
         this.ort = ort;
         this.bundesland = bundesland;
-        this.maApZuordsById = maApZuordsById;
+
+        maApZuordsById = new HashSet<>();
+
     }
 
     @Override
@@ -70,6 +73,11 @@ public class MitarbeiterEntity {
                 ", bundesland='" + bundesland + '\'' +
       //          ", maApZuordsById=" + maApZuordsById +
                 '}';
+    }
+
+    public void addMaApZo(MaApZuordEntity mazo){
+        this.maApZuordsById.add(mazo);
+         mazo.setMitarbeiterByMaId(this);
     }
 
     public Integer getId() {

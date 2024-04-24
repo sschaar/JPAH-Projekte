@@ -35,8 +35,9 @@ public class MaApZuordEntity {
         this.std = std;
         this.datum = Date.valueOf(datum);
         this.anmerkung = anmerkung;
-        this.mitarbeiterByMaId = mitarbeiterByMaId;
-        this.arbeitspaketeByApId = arbeitspaketeByApId;
+
+        mitarbeiterByMaId.addMaApZo(this);
+        arbeitspaketeByApId.addMaApZo(this);
     }
 
     @Override
