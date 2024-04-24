@@ -44,5 +44,12 @@ public class TestApp {
 
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         System.out.println(em.find(ProjekteEntity.class, 2));
+        List<ProjekteEntity> projekteByCode = ProjekteDao.findProjectsByCode("WSTP");
+
+        for (ProjekteEntity pt : projekteByCode) {
+            System.out.println(pt);
+        }
+
+        //  System.out.println(ProjekteDao.findArbeitspaketByCode("WSTP"));
     }
 }
